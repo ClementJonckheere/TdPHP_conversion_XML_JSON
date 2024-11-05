@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TD - Conversion XML - JSON</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="assets/notification.js" defer></script>
+</head>
+<body class="container mt-5">
+
+<section class="section">
+    <div class="container">
+        <h2 class="title">Convertir un fichier XML en JSON ou JSON en XML</h2>
+
+        <form id="conversionForm" enctype="multipart/form-data">
+            <div class="field">
+                <label class="label">Choisissez un fichier (XML ou JSON) :</label>
+                <div class="control">
+                    <input class="input" type="file" name="file" id="file" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Choisissez le format de destination :</label>
+                <div class="control">
+                    <div class="select">
+                        <select name="format" id="format" required>
+                            <option value="xml-to-json">XML vers JSON</option>
+                            <option value="json-to-xml">JSON vers XML</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Convertir">
+                </div>
+            </div>
+        </form>
+
+        <div id="notification" class="mt-3"></div>
+    </div>
+</section>
+
+</body>
+</html>
