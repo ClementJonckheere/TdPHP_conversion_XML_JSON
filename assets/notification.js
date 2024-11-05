@@ -6,11 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
         httpRequest.open('POST', 'index.php', true);
         httpRequest.onload = function() {
             if (httpRequest.status === 200) {
-                var response = JSON.parse(httpRequest.responseText);
-                if (response.error) {
-                    showNotification(response.error, 'is-danger');
-                } else {
-                    showNotification(response.message, 'is-success');
+                try {
+                    var response = JSON.parse(httpRequest.responseText);
+                    if (response.error) {
+                        showNotification(response.error, 'is-danger');
+                    } else {
+                        showNotification(response.message, 'is-success');
+                        if (response.downloadLink && response.fileName) {
+                            showDownloadLink(response.downloadLink, response.fileName);
+                        }
+                    }
+                } catch (e) {
+                    showNotification('Erreur lors de la conversion.', 'is-danger');
                 }
             } else {
                 showNotification('Erreur lors de la conversion.', 'is-danger');
@@ -34,4 +41,10 @@ function showNotification(message, type) {
     setTimeout(function() {
         notification.remove();
     }, 10000);
+}
+
+function showDownloadLink(link, fileName) {
+    var downloadLink = document.createElement('div');
+    downloadLink.innerHTML = `<a href="${link}" download>Télécharger le fichier converti : (${fileName})</a>`;
+    document.getElementById('notification').appendChild(downloadLink);
 }
